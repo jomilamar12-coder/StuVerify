@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA Student Verification</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-area">
+            <img src="ua1.png" alt="University Logo" class="logo">
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('register')">Register</button>
+            <button class="tab-btn" onclick="switchTab('verify')">Verify ID</button>
+        </div>
+
+        <div id="registerSection" class="section">
+            <div class="header">
+                <h2>Student Registration</h2>
+                <p>Create profile & generate QR</p>
+            </div>
+
+            <div class="input-group">
+                <label>Student ID</label>
+                <input type="text" id="regId" placeholder="e.g., 2023-0001">
+            </div>
+            
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="regName" placeholder="e.g., Juan Dela Cruz">
+            </div>
+
+            <div class="input-group">
+                <label>Course / Year</label>
+                <input type="text" id="regCourse" placeholder="e.g., BSIT - 3rd Year">
+            </div>
+
+            <div class="input-group">
+                <label>Profile Picture</label>
+                <input type="file" id="regPhoto" accept="image/*" class="file-input">
+            </div>
+
+            <button class="btn btn-primary" onclick="registerStudent()">Generate QR Code</button>
+
+            <div id="qrDisplay" class="qr-container" style="display:none;">
+                <h3>Registration Successful!</h3>
+                <div id="qrcode"></div>
+                <p id="qrText" class="qr-text"></p>
+                <button class="btn btn-secondary" onclick="clearForm()">Register Another</button>
+            </div>
+        </div>
+
+        <div id="verifySection" class="section" style="display:none;">
+            <div class="header">
+                <h2>ID Verification</h2>
+                <p>Scan to validate student status</p>
+            </div>
+
+            <div id="reader" style="width: 100%; display:none; margin-bottom: 20px;"></div>
+
+            <div class="input-group">
+                <input type="text" id="verifyInput" placeholder="Enter Student ID or Scan QR">
+            </div>
+
+            <button class="btn btn-primary" onclick="verifyStudent()">Check Status</button>
+            
+            <button class="btn btn-scan" onclick="startScanner()">
+                <span>📷</span> Open Camera Scanner
+            </button>
+
+            <div id="loader" class="loader"></div>
+
+            <div id="resultArea" class="result-card">
+                </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
